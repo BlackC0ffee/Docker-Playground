@@ -39,5 +39,5 @@ Copy installation files of docker inside the folder DocuWiki/docuwiki
 ```
 cd DocuWiki
 docker build -t docuwiki .
-docker run -d -p 80:80 docuwiki
+docker-compose up --build
 ```

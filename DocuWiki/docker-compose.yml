@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  docuwiki:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - /home/pi/docuwiki/conf:/var/www/html/conf:rw
+      - /home/pi/docuwiki/data:/var/www/html/data:rw
