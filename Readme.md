@@ -1,4 +1,4 @@
-#Docker POC
+# Docker Playground
 
 ## Install Docker on RPi
 
@@ -7,7 +7,6 @@ sudo apt update && sudo apt upgrade -f
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo usermod -aG docker Pi
-`/usr/bin/dockerd-rootless-setuptool.sh uninstall -f ; /usr/bin/rootlesskit rm -rf /home/pi/.local/share/docker`
 dockerd-rootless-setuptool.sh install
 ```
 
@@ -30,5 +29,15 @@ pip3 install docker-compose
 Source: https://docs.docker.com/compose/gettingstarted/
 
 ```
+cd C0ffee
+docker-compose up -d --build
+```
 
+## Docuwiki Container
+
+Copy installation files of docker inside the folder DocuWiki/docuwiki
+```
+cd DocuWiki
+docker build -t docuwiki .
+docker run -d -p 80:80 docuwiki
 ```
