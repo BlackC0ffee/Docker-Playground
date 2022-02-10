@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap');
+
+.title{
+    font-family: 'Inconsolata', consolas, monospace;
+    font-size: xxx-large;
+    text-align: center;
+}
