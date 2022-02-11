@@ -41,3 +41,25 @@ cd DocuWiki
 docker build -t docuwiki .
 docker-compose up --build
 ```
+
+## RPi Montior using Grafana and Influxdb
+
+- Source (kind of): https://andreea-sonda31.medium.com/monitor-raspberry-pi-resources-and-parameters-with-grafana-board-part-1-ab0567303e8
+- And also: https://www.jeffgeerling.com/blog/2021/monitor-your-internet-raspberry-pi
+- Influx DB 1.8 stuff: https://blog.anoff.io/2020-12-run-influx-on-raspi-docker-compose/
+- InfluxDB stuff (not supported under RPi 4 32-bit): https://www.influxdata.com/blog/running-influxdb-2-0-and-telegraf-using-docker/
+- https://simonhearne.com/2020/pi-metrics-influx/
+
+See: Media\Docker-Grafana+influxdb+pythonscript.png
+
+```
+cd Monitor
+```
+Generate the config file fore influxdb `docker run --rm influxdb:1.8 influxd config > influxdb.conf`
+
+This has created a `influxdb.conf` file under the currend directory
+
+```
+pip3 install influxdb-client
+docker-compose up
+```

@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  Grafana:
+    image: grafana/grafana-oss
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-config:/var/lib/grafana
+    networks:
+      - backend
+
+  InfluxDB:
+    image: influxdb:1.8
+    container_name: influxdb
+    ports:
+      - 8086:8086
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+      - $PWD/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+    networks:
+     - backend
+
+volumes:
+  grafana-config:
+  influxdb-storage:
+
+networks:
+  backend:
