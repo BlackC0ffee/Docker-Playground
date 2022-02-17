@@ -60,6 +60,16 @@ Generate the config file fore influxdb `docker run --rm influxdb:1.8 influxd con
 This has created a `influxdb.conf` file under the currend directory
 
 ```
-pip3 install influxdb-client
-docker-compose up
+pip3 install influxdb-client psutil
+docker-compose up -d
+```
+1. Open the grafana dashboard (http://hostname:3000/) and log in with admin:admin.
+1. Go to Data sources and create a new Influxdb Data source with following parameters:
+    - URL: http://influxdb:8086
+    - Database: pyexample
+1. Save the data source. In the menu click on Import
+1. Import the json-file Grafana/Dashboard.json
+1. In the terminal, run the script:
+```
+python3 Monitor.py
 ```
