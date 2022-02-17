@@ -1,5 +1,7 @@
 # Docker Playground
 
+Warning: all content of  this repository was used as a Proof of Concept with no security in mind. DO NOT USE THIS IN PRODUCTION.
+
 ## Install Docker on RPi
 
 ```
@@ -73,3 +75,49 @@ docker-compose up -d
 ```
 python3 Monitor.py
 ```
+
+## Grafana, Influxdb and Telegraf
+
+source: https://nwmichl.net/2020/07/14/telegraf-influxdb-grafana-on-raspberrypi-from-scratch/
+
+```
+cd Monitor
+docker-compose up -d
+```
+
+Attach a shell (using visual studio code) on the influxdb container
+
+```
+influx
+create database telegraf
+exit
+```
+
+Close the attached shell and install telegraf on the hosts
+
+```
+wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+echo "deb https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+sudo apt update
+sudo apt install telegraf
+```
+
+Add the user to the correct groups, copy the config files and enable the service 
+
+```
+sudo usermod -a -G video telegraf
+sudo cp Telegraf/telegraf.conf
+sudo cp Telegraf/raspberrypi.conf /etc/telegraf/telegraf.d/
+sudo systemctl enable telegraf
+sudo systemctl start telegraf
+```
+
+1. Open the grafana dashboard (http://hostname:3000/) and log in with admin:admin.
+1. Go to Data sources and create a new Influxdb Data source with following parameters:
+    - Name: InfluxDB-Telegraf
+    - URL: http://influxdb:8086
+    - Database: telegraf
+1. Click on Import
+1. Enter the ID 10578 and click on Load
+1. Select InfluxDB-Telegraf as data source
+1. Click on Import
